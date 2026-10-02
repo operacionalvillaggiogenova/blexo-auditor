@@ -1,0 +1,2 @@
+BOOTSTRAP_TOKEN=local-bootstrap-token
+SESSION_SECRET=local-session-secret-change-this-value

@@ -1,0 +1,32 @@
+{
+  "name": "blexo-auditor",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:web && npm run build -w @blexo/api",
+    "build:web": "npm run build -w @blexo/web",
+    "deploy": "npm run build:web && npm run deploy -w @blexo/api",
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w @blexo/api\" \"npm run dev -w @blexo/web\"",
+    "dev:api": "npm run dev -w @blexo/api",
+    "dev:web": "npm run dev -w @blexo/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && npm run test:migrations",
+    "test:migrations": "python scripts/validate_migrations.py",
+    "check": "npm run typecheck && npm test && npm run build",
+    "db:migrate:local": "npm run db:migrate:local -w @blexo/api",
+    "db:migrate:remote": "npm run db:migrate:remote -w @blexo/api"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "concurrently": "^9.2.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

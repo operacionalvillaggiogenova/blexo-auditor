@@ -1,0 +1,27 @@
+{
+  "name": "@blexo/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local --port 8787 --var APP_ENV:development",
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote"
+  },
+  "dependencies": {
+    "@blexo/cnab240": "*",
+    "@blexo/contracts": "*",
+    "@blexo/domain": "*",
+    "hono": "^4.9.8",
+    "pdf-lib": "^1.17.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250927.0",
+    "wrangler": "^4.41.0"
+  }
+}
